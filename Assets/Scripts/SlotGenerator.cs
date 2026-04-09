@@ -17,7 +17,7 @@ public class SlotGenerator : MonoBehaviour
     private void Awake()
     {
         GenerateSlots();
-        OnDateChange(new DateTime(currYear, currMonth, 1).ToString("MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")));
+        OnDateChange?.Invoke(new DateTime(currYear, currMonth, 1).ToString("MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")));
     }
 
     private void GenerateSlots()
@@ -48,7 +48,7 @@ public class SlotGenerator : MonoBehaviour
         {
             var slot  = slots[i];
             slots.Remove(slot);
-            Destroy(slot.gameObject);
+            DestroyImmediate(slot.gameObject);
         }
     }
 
