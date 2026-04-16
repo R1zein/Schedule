@@ -8,31 +8,29 @@ using System;
 public class Slot : MonoBehaviour
 {
     [SerializeField] private TMP_Text dateText;
-    private TMP_Dropdown dropdown;
-    [SerializeField] private GameObject addNotePanel;
+    [SerializeField] private Button addNoteButton;
+
+    private DateNoteManager _dateNoteManager;
+    private DateTime _date;
 
 
     private void Awake()
     {
-        dropdown = GetComponentInChildren <TMP_Dropdown>();
-        List<string> options = new List<string>()
-        {
-            "Add Note",
-            "Highlight"
-        };
-        dropdown.AddOptions(options);
-        dropdown.onValueChanged.AddListener(OnValueChangeDropdown);
-
+        _dateNoteManager = FindAnyObjectByType<DateNoteManager>(FindObjectsInactive.Include);
+        addNoteButton.onClick.AddListener(AddNote);
     }
     public void SetData(DateTime date)
     {
+        _date = date;
         dateText.text = date.ToString("d MMMM", new System.Globalization.CultureInfo("ru-RU"));
     }
 
-    public void OnValueChangeDropdown(int index)
+    private void AddNote()
     {
-        addNotePanel.SetActive(true);
+        _dateNoteManager.EditNoteByDate(_date);
     }
+
+    
         
     
 }
