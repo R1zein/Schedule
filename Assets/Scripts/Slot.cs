@@ -22,7 +22,7 @@ public class Slot : MonoBehaviour
     public void SetData(DateTime date)
     {
         _date = date;
-        dateText.text = date.ToString("d MMMM", new System.Globalization.CultureInfo("ru-RU"));
+        dateText.text = date.ToString("dd", new System.Globalization.CultureInfo("ru-RU"));
     }
 
     private void AddNote()

@@ -12,7 +12,14 @@ public class SaveData : ScriptableObject
 
     public void AddData(DateData data)
     {
-        _dateDatas.Add(data);
+        if (TryGetDateData(data.date, out DateData fod))
+        {
+            fod = data;
+        }
+        else
+        {
+            _dateDatas.Add(data);
+        }
     }
 
 
@@ -36,8 +43,15 @@ public class SaveData : ScriptableObject
 
 public class DateData
 {
-    public DateTime date;
+    private long dateTicks;
     public string note;
     public Color highlightColor;
+
+    public DateTime date
+    {
+        get =>new DateTime(dateTicks);
+        set => dateTicks = value.Ticks;
+    }
 }
+
 
