@@ -12,14 +12,17 @@ public class SlotGenerator : MonoBehaviour
     private List<DateTime> dates = new();
     private int currMonth = 1;
     private int currYear = 2026;
+    private SlotPopupManager _popupManager;
     [SerializeField] private List<Slot> slots = new();
     public event Action <string> OnDateChange ;
 
 
     private void Awake()
     {
+        _popupManager = new SlotPopupManager();
         GenerateSlots();
         OnDateChange?.Invoke(new DateTime(currYear, currMonth, 1).ToString("MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")));
+
     }
 
     private void GenerateSlots()
@@ -68,10 +71,11 @@ public class SlotGenerator : MonoBehaviour
             obj.transform.SetParent(rows[weekIndex]);
             obj.tag = "Filler";
         }
+        _popupManager.SetCurrentSlots(slots);
     }
 
     
-
+    
 
     private void DeleteSlots()
     {
