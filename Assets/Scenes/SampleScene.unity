@@ -1883,6 +1883,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationDurration: 0.5
   image: {fileID: 873772610}
+  minRange: 200
+  maxRange: 600
 --- !u!1 &1472372155
 GameObject:
   m_ObjectHideFlags: 0

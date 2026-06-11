@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5f8746d459d6090459c9b0213bd5886f
+guid: 64c5b8bead7440b48acb11703e56a5a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1042190706603249634
-    second: icons8-undo-52_0
+      213: 8553323820448849824
+    second: icons8-book-100_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icons8-undo-52_0
+      name: icons8-book-100_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 52
-        height: 49
+        x: 11
+        y: 3
+        width: 78
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e1033b8f2156981f0800000000000000
-      internalID: -1042190706603249634
+      spriteID: 0af9dbe72b283b670800000000000000
+      internalID: 8553323820448849824
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icons8-undo-52_0: -1042190706603249634
+      icons8-book-100_0: 8553323820448849824
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

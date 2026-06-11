@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 5f8746d459d6090459c9b0213bd5886f
+guid: 55a290f1f21f576428cdb8304b671b05
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1042190706603249634
-    second: icons8-undo-52_0
+      213: 9176501364796452882
+    second: icons8-highlight-100_0
+  - first:
+      213: 3716602662536849966
+    second: icons8-highlight-100_1
+  - first:
+      213: -4940323953148911259
+    second: icons8-highlight-100_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icons8-undo-52_0
+      name: icons8-highlight-100_0
       rect:
         serializedVersion: 2
         x: 0
         y: 1
-        width: 52
-        height: 49
+        width: 22
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e1033b8f2156981f0800000000000000
-      internalID: -1042190706603249634
+      spriteID: 21074914f5b795f70800000000000000
+      internalID: 9176501364796452882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icons8-highlight-100_1
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 8
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2aa7cf1e66049330800000000000000
+      internalID: 3716602662536849966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icons8-highlight-100_2
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 19
+        width: 79
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 561a4312a81707bb0800000000000000
+      internalID: -4940323953148911259
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icons8-undo-52_0: -1042190706603249634
+      icons8-highlight-100_0: 9176501364796452882
+      icons8-highlight-100_1: 3716602662536849966
+      icons8-highlight-100_2: -4940323953148911259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

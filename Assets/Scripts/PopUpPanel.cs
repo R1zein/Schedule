@@ -6,6 +6,8 @@ public class PopUpPanel : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
     [SerializeField] private float animationDurration;
     [SerializeField] private Image image;
+    [SerializeField] private float minRange;
+    [SerializeField] private float maxRange;
     private float distance;
     private float progress;
     private float speed = 1;
@@ -32,14 +34,11 @@ public class PopUpPanel : MonoBehaviour
             image.transform.position
         );
         var dis = Vector2.Distance(Input.mousePosition, elementScreenPos);
-        if (dis > 300)
-        {
-            image.color = new Color(1, 1, 1, 0.5f);
-        }
-        else
-        {
-            image.color = new Color(1, 1, 1, 1);
-        }
+        float ratio = (dis - minRange)/(maxRange-minRange);
+        ratio = Mathf.Clamp01(ratio);
+        float alpha = Mathf.Lerp(1, 0, ratio);
+        image.color = new Color(1, 1, 1, alpha);
+        
 
     }
 
