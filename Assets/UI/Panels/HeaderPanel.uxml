@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="header-root" class="header">
+        <ui:Button name="header-previous" text="&#8249;" class="header__nav" />
+        <ui:Label name="header-title" text="Месяц Год" class="header__title" />
+        <ui:Button name="header-next" text="&#8250;" class="header__nav" />
+    </ui:VisualElement>
+</ui:UXML>

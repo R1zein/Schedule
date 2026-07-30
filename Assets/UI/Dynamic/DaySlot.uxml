@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <!-- Динамический шаблон: ячейка дня. Ссылка живёт в UITemplateLibrary. -->
+    <ui:VisualElement name="day-slot" class="slot">
+        <ui:Button name="slot-surface" class="slot__surface">
+            <ui:Label name="slot-day" text="00" class="slot__day" />
+            <ui:VisualElement name="slot-note-mark" class="slot__note-mark" />
+        </ui:Button>
+
+        <ui:VisualElement name="slot-popup" class="slot__popup">
+            <ui:Button name="slot-add-note" class="slot__action" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

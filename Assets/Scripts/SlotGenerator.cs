@@ -1,8 +1,6 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
-using System.Data;
 
 public class SlotGenerator : MonoBehaviour
 {

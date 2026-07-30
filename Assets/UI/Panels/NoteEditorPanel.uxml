@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="note-scrim" class="note-scrim">
+        <ui:VisualElement name="note-card" class="note-card">
+            <ui:VisualElement name="note-card-header" class="note-card__header">
+                <ui:Label name="note-title" text="Дата" class="note-card__title" />
+                <ui:Button name="note-close" text="&#215;" class="note-card__close" />
+            </ui:VisualElement>
+
+            <ui:TextField name="note-input" multiline="true" class="note-card__input" />
+
+            <ui:VisualElement name="note-card-footer" class="note-card__footer">
+                <ui:Button name="note-save" text="Сохранить" class="button button--primary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

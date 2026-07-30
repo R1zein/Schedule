@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="calendar-root" class="calendar">
+        <ui:VisualElement name="calendar-weekdays" class="calendar__weekdays">
+            <ui:Label name="weekday-0" text="Пн" class="weekday" />
+            <ui:Label name="weekday-1" text="Вт" class="weekday" />
+            <ui:Label name="weekday-2" text="Ср" class="weekday" />
+            <ui:Label name="weekday-3" text="Чт" class="weekday" />
+            <ui:Label name="weekday-4" text="Пт" class="weekday" />
+            <ui:Label name="weekday-5" text="Сб" class="weekday weekday--weekend" />
+            <ui:Label name="weekday-6" text="Вс" class="weekday weekday--weekend" />
+        </ui:VisualElement>
+
+        <!-- Сюда в рантайме кладутся WeekRow.uxml с DaySlot.uxml внутри -->
+        <ui:VisualElement name="calendar-grid" class="calendar__grid" />
+    </ui:VisualElement>
+</ui:UXML>
