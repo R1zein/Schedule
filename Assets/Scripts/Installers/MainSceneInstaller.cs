@@ -29,16 +29,14 @@ namespace Schedule.Installers
             Container.BindInstance(_templates);
             Container.BindInstance(new LocalizationConfig(_cultureName));
 
-            Container.Bind<CalendarService>().AsSingle();
-            Container.Bind<NoteService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CalendarService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<NoteService>().AsSingle();
 
             Container.BindFactory<TemplateContainer, DaySlotView, DaySlotView.Factory>();
 
-            Container.Bind<HeaderPanelController>().AsSingle();
-            Container.Bind<CalendarPanelController>().AsSingle();
-            Container.Bind<NoteEditorPanelController>().AsSingle();
-
-            Container.BindInterfacesAndSelfTo<UIRootController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<HeaderPanelController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CalendarPanelController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<NoteEditorPanelController>().AsSingle();
         }
     }
 }

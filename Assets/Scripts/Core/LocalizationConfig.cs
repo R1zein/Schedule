@@ -10,9 +10,7 @@ namespace Schedule.Core
     {
         public LocalizationConfig(string cultureName)
         {
-            Culture = string.IsNullOrWhiteSpace(cultureName)
-                ? CultureInfo.CurrentCulture
-                : new CultureInfo(cultureName);
+            Culture = new CultureInfo(cultureName);
         }
 
         public CultureInfo Culture { get; }

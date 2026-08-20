@@ -27,7 +27,7 @@ namespace Schedule.UI.Elements
 
         public DaySlotView(TemplateContainer root)
         {
-            _root = root ?? throw new ArgumentNullException(nameof(root));
+            _root = root;
             _root.AddToClassList("slot-cell");
 
             _slot = _root.Q<VisualElement>("day-slot");

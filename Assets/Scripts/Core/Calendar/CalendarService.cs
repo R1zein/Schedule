@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Zenject;
 
 namespace Schedule.Core.Calendar
 {
@@ -8,20 +9,22 @@ namespace Schedule.Core.Calendar
     /// Модель календаря: текущий месяц и его сетка. Ни о каком UI не знает,
     /// сообщает о смене месяца только через событие <see cref="Changed"/>.
     /// </summary>
-    public class CalendarService
+    public class CalendarService : IInitializable
     {
         public const int DaysInWeek = 7;
 
-        private readonly CultureInfo _culture;
-        private readonly List<DayCell> _days = new();
+        private CultureInfo _culture;
+        private List<DayCell> _days = new();
 
         private DateTime _month;
 
         public event Action Changed;
 
-        public CalendarService(LocalizationConfig localization)
+        [Inject] private LocalizationConfig _localization;
+
+        public void Initialize()
         {
-            _culture = localization.Culture;
+            _culture = _localization.Culture;
 
             DateTime today = DateTime.Today;
             SetMonth(new DateTime(today.Year, today.Month, 1));

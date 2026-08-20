@@ -4,61 +4,61 @@ using Schedule.Core.Calendar;
 using Schedule.Core.Notes;
 using Schedule.UI.Elements;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace Schedule.UI.Panels
 {
     /// <summary>
-    /// Сетка месяца: строит недели и ячейки из динамических шаблонов,
-    /// держит выделение (одна открытая ячейка) и сообщает наверх о запросе заметки.
+    /// Сетка месяца: строит недели и ячейки из динамических шаблонов
+    /// и держит выделение — одну открытую ячейку.
     /// </summary>
-    public class CalendarPanelController : IDisposable
+    public class CalendarPanelController : IInitializable, IDisposable
     {
-        public const string ElementName = "calendar-panel";
-
         private readonly List<VisualElement> _rows = new();
         private readonly List<DaySlotView> _slots = new();
 
-        private UITemplateLibrary _templates;
-        private NoteService _notes;
-        private DaySlotView.Factory _slotFactory;
+        [Inject] private UIDocument _document;
+        [Inject] private UITemplateLibrary _templates;
+        [Inject] private CalendarService _calendar;
+        [Inject] private NoteService _notes;
+        [Inject] private NoteEditorPanelController _noteEditor;
+        [Inject] private DaySlotView.Factory _slotFactory;
 
         private VisualElement _root;
         private VisualElement _grid;
         private DaySlotView _selected;
 
-        public event Action<DateTime> NoteRequested;
-
-        public void Initialize(
-            VisualElement root,
-            UITemplateLibrary templates,
-            NoteService notes,
-            DaySlotView.Factory slotFactory)
+        public void Initialize()
         {
-            _root = root;
-            _templates = templates;
-            _notes = notes;
-            _slotFactory = slotFactory;
-
+            _root = _document.rootVisualElement.Q<VisualElement>("calendar-panel");
             _grid = _root.Q<VisualElement>("calendar-grid");
-        }
 
-        public void SetWeekDayNames(Func<int, string> nameProvider)
-        {
             for (int i = 0; i < CalendarService.DaysInWeek; i++)
             {
-                var label = _root.Q<Label>($"weekday-{i}");
-                if (label != null)
-                {
-                    label.text = nameProvider(i);
-                }
+                _root.Q<Label>($"weekday-{i}").text = _calendar.GetWeekDayName(i);
             }
+
+            _calendar.Changed += Rebuild;
+            _notes.NoteChanged += OnNoteChanged;
+
+            Rebuild();
         }
 
-        public void Rebuild(IReadOnlyList<DayCell> days)
+        public void Dispose()
+        {
+            _calendar.Changed -= Rebuild;
+            _notes.NoteChanged -= OnNoteChanged;
+
+            Clear();
+        }
+
+        private void Rebuild()
         {
             Clear();
 
+            IReadOnlyList<DayCell> days = _calendar.Days;
             VisualElement row = null;
+
             for (int i = 0; i < days.Count; i++)
             {
                 if (i % CalendarService.DaysInWeek == 0)
@@ -83,7 +83,7 @@ namespace Schedule.UI.Panels
             }
         }
 
-        public void RefreshDay(DateTime date)
+        private void OnNoteChanged(DateTime date)
         {
             foreach (DaySlotView slot in _slots)
             {
@@ -92,18 +92,14 @@ namespace Schedule.UI.Panels
                     slot.SetHasNote(_notes.HasNote(date.Date));
                 }
             }
+
+            ClearSelection();
         }
 
-        public void ClearSelection()
+        private void ClearSelection()
         {
             _selected?.SetSelected(false);
             _selected = null;
-        }
-
-        public void Dispose()
-        {
-            Clear();
-            NoteRequested = null;
         }
 
         private void Clear()
@@ -140,6 +136,6 @@ namespace Schedule.UI.Panels
             _selected.SetSelected(true);
         }
 
-        private void OnSlotNoteRequested(DaySlotView slot) => NoteRequested?.Invoke(slot.Date);
+        private void OnSlotNoteRequested(DaySlotView slot) => _noteEditor.Open(slot.Date);
     }
 }

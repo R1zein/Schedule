@@ -1,20 +1,22 @@
 using System;
-using System.Globalization;
 using Schedule.Core;
+using Schedule.Core.Notes;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace Schedule.UI.Panels
 {
     /// <summary>
     /// Оверлей редактирования заметки на дату.
     /// </summary>
-    public class NoteEditorPanelController : IDisposable
+    public class NoteEditorPanelController : IInitializable, IDisposable
     {
-        public const string ElementName = "note-editor-panel";
-
         private const string HiddenClass = "panel--hidden";
 
-        private CultureInfo _culture;
+        [Inject] private UIDocument _document;
+        [Inject] private LocalizationConfig _localization;
+        [Inject] private NoteService _notes;
+
         private VisualElement _root;
         private VisualElement _scrim;
         private Label _title;
@@ -24,15 +26,11 @@ namespace Schedule.UI.Panels
 
         private DateTime _date;
 
-        public event Action<DateTime, string> Saved;
-        public event Action Closed;
+        public bool IsOpen => !_root.ClassListContains(HiddenClass);
 
-        public bool IsOpen => _root != null && !_root.ClassListContains(HiddenClass);
-
-        public void Initialize(VisualElement root, LocalizationConfig localization)
+        public void Initialize()
         {
-            _root = root;
-            _culture = localization.Culture;
+            _root = _document.rootVisualElement.Q<VisualElement>("note-editor-panel");
 
             _scrim = _root.Q<VisualElement>("note-scrim");
             _title = _root.Q<Label>("note-title");
@@ -41,17 +39,17 @@ namespace Schedule.UI.Panels
             _close = _root.Q<Button>("note-close");
 
             _save.clicked += OnSaveClicked;
-            _close.clicked += OnCloseClicked;
+            _close.clicked += Close;
             _scrim.RegisterCallback<ClickEvent>(OnScrimClicked);
 
             Hide();
         }
 
-        public void Open(DateTime date, string note)
+        public void Open(DateTime date)
         {
             _date = date.Date;
-            _title.text = _date.ToString("d MMMM yyyy", _culture);
-            _input.SetValueWithoutNotify(note ?? string.Empty);
+            _title.text = _date.ToString("d MMMM yyyy", _localization.Culture);
+            _input.SetValueWithoutNotify(_notes.GetNote(_date));
 
             _root.RemoveFromClassList(HiddenClass);
             _input.schedule.Execute(() => _input.Focus());
@@ -59,46 +57,26 @@ namespace Schedule.UI.Panels
 
         public void Close()
         {
-            if (!IsOpen)
+            if (IsOpen)
             {
-                return;
+                Hide();
             }
-
-            Hide();
-            Closed?.Invoke();
         }
 
         public void Dispose()
         {
-            if (_save != null)
-            {
-                _save.clicked -= OnSaveClicked;
-            }
-
-            if (_close != null)
-            {
-                _close.clicked -= OnCloseClicked;
-            }
-
-            _scrim?.UnregisterCallback<ClickEvent>(OnScrimClicked);
-
-            Saved = null;
-            Closed = null;
+            _save.clicked -= OnSaveClicked;
+            _close.clicked -= Close;
+            _scrim.UnregisterCallback<ClickEvent>(OnScrimClicked);
         }
 
         private void Hide() => _root.AddToClassList(HiddenClass);
 
         private void OnSaveClicked()
         {
-            DateTime date = _date;
-            string note = _input.value;
-
             Hide();
-            Saved?.Invoke(date, note);
-            Closed?.Invoke();
+            _notes.SetNote(_date, _input.value);
         }
-
-        private void OnCloseClicked() => Close();
 
         private void OnScrimClicked(ClickEvent evt)
         {

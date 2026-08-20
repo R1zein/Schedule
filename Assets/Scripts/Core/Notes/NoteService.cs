@@ -1,5 +1,6 @@
 using System;
 using Schedule.Core.Data;
+using Zenject;
 
 namespace Schedule.Core.Notes
 {
@@ -7,15 +8,15 @@ namespace Schedule.Core.Notes
     /// Доступ к заметкам поверх <see cref="SaveData"/>. О UI не знает,
     /// об изменениях сообщает событием <see cref="NoteChanged"/>.
     /// </summary>
-    public class NoteService
+    public class NoteService : IInitializable
     {
-        private readonly SaveData _saveData;
+        [Inject] private SaveData _saveData;
 
         public event Action<DateTime> NoteChanged;
 
-        public NoteService(SaveData saveData)
+        public void Initialize()
         {
-            _saveData = saveData != null ? saveData : throw new ArgumentNullException(nameof(saveData));
+            // сюда встанет загрузка заметок, когда они переедут из ScriptableObject на диск
         }
 
         public string GetNote(DateTime date)

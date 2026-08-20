@@ -1,7 +1,9 @@
 {
     "name": "Schedule.Core",
     "rootNamespace": "Schedule.Core",
-    "references": [],
+    "references": [
+        "Zenject"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
