@@ -80,11 +80,7 @@ namespace Schedule.Core.Calendar
             {
                 DateTime date = first.AddDays(i);
                 bool current = date.Year == _month.Year && date.Month == _month.Month;
-                bool dayOff = date.DayOfWeek == DayOfWeek.Saturday
-                    || date.DayOfWeek == DayOfWeek.Sunday
-                    || RussianHolidays.IsHoliday(date);
-
-                _days.Add(new DayCell(date, current, date == today, dayOff));
+                _days.Add(new DayCell(date, current, date == today, RussianDaysOff.IsDayOff(date)));
             }
         }
     }
