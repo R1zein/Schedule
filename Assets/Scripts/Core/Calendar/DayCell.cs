@@ -10,12 +10,14 @@ namespace Schedule.Core.Calendar
         public readonly DateTime Date;
         public readonly bool IsCurrentMonth;
         public readonly bool IsToday;
+        public readonly bool IsDayOff;
 
-        public DayCell(DateTime date, bool isCurrentMonth, bool isToday)
+        public DayCell(DateTime date, bool isCurrentMonth, bool isToday, bool isDayOff)
         {
             Date = date;
             IsCurrentMonth = isCurrentMonth;
             IsToday = isToday;
+            IsDayOff = isDayOff;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Schedule.UI.Elements
     public class DaySlotView : IDisposable
     {
         private const string OutsideClass = "slot--outside";
+        private const string DayOffClass = "slot--day-off";
         private const string TodayClass = "slot--today";
         private const string SelectedClass = "slot--selected";
         private const string HasNoteClass = "slot--has-note";
@@ -50,6 +51,7 @@ namespace Schedule.UI.Elements
 
             _slot.EnableInClassList(OutsideClass, !cell.IsCurrentMonth);
             _slot.EnableInClassList(TodayClass, cell.IsToday);
+            _slot.EnableInClassList(DayOffClass, cell.IsDayOff);
             SetSelected(false);
             SetHasNote(hasNote);
         }

@@ -10,6 +10,7 @@
     --text-dim: rgb(150, 156, 172);
     --accent: rgb(232, 168, 84);
     --accent-dim: rgb(196, 128, 96);
+    --day-off: rgb(232, 104, 104);
 
     /* Шрифт проекта. Раскомментировать после проверки, что TMP-ассет
        подхватывается UI Toolkit (Unity 6 умеет это через -unity-font-definition):
@@ -103,7 +104,7 @@
 }
 
 .weekday--weekend {
-    color: var(--accent-dim);
+    color: var(--day-off);
 }
 
 .calendar__grid {
@@ -161,9 +162,13 @@
     color: var(--text);
 }
 
-.slot--outside .slot__day {
-    color: var(--text-dim);
-    opacity: 0.5;
+.slot--day-off .slot__day {
+    color: var(--day-off);
+}
+
+/* дни соседних месяцев глушим прозрачностью, чтобы красный выходного не терялся */
+.slot--outside {
+    opacity: 0.45;
 }
 
 .slot--today {
