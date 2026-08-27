@@ -1,0 +1,113 @@
+/* Ячейка дня и её состояния. Отдельным листом, потому что состояния переключаются
+   классами из C# (DaySlotView) и инлайном не выражаются: инлайн-стиль в UI Toolkit
+   перебить нельзя, и модификатор до свойства уже не дотянется.
+   Подключён в DaySlot.uxml — чтобы ячейка открывалась отдельно, и в CalendarPanel.uxml —
+   чтобы в рантайме накрыть ещё и обёртки шаблонов, которые лежат выше корня ячейки. */
+
+/* TemplateContainer недели и ячейки: класс вешает CalendarPanelController */
+.week-row-container {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.slot-cell {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.slot {
+    flex-grow: 1;
+    margin: 3px;
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: 12px;
+    background-color: var(--surface);
+    overflow: hidden;
+}
+
+.slot__surface {
+    flex-grow: 1;
+    margin: 0;
+    padding: 6px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 12px;
+    transition-property: background-color;
+    transition-duration: 0.12s;
+}
+
+.slot__surface:hover {
+    background-color: var(--surface-hover);
+}
+
+.slot__day {
+    font-size: 17px;
+    color: var(--text);
+}
+
+.slot--day-off .slot__day {
+    color: var(--day-off);
+}
+
+/* дни соседних месяцев глушим прозрачностью, чтобы красный выходного не терялся */
+.slot--outside {
+    opacity: 0.45;
+}
+
+.slot--today {
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.slot__note-mark {
+    display: none;
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--accent);
+}
+
+.slot--has-note .slot__note-mark {
+    display: flex;
+}
+
+/* выезжающая панель действий */
+.slot__popup {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 42%;
+    min-width: 34px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    translate: 110% 0;
+    transition-property: translate;
+    transition-duration: 0.18s;
+    transition-timing-function: ease-out;
+}
+
+.slot--selected .slot__popup {
+    translate: 0 0;
+}
+
+.slot__action {
+    width: 26px;
+    height: 26px;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("project://database/Assets/Textures/Icons/Notes.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slot__action:hover {
+    scale: 1.15 1.15;
+}

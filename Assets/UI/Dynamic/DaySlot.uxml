@@ -1,4 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+    <Style src="project://database/Assets/UI/Styles/Slot.uss" />
+
     <!-- Динамический шаблон: ячейка дня. Ссылка живёт в UITemplateLibrary. -->
     <ui:VisualElement name="day-slot" class="slot">
         <ui:Button name="slot-surface" class="slot__surface">

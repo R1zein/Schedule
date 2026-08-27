@@ -1,15 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="note-scrim" class="note-scrim">
-        <ui:VisualElement name="note-card" class="note-card">
-            <ui:VisualElement name="note-card-header" class="note-card__header">
-                <ui:Label name="note-title" text="Дата" class="note-card__title" />
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+
+    <ui:VisualElement name="note-scrim" style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.55);">
+        <ui:VisualElement name="note-card" class="card" style="width: 82%; max-width: 520px; padding: 16px; border-radius: 16px; border-width: 1px;">
+            <ui:VisualElement name="note-card-header" style="flex-direction: row; align-items: center; justify-content: space-between;">
+                <ui:Label name="note-title" text="Дата" class="tx-bright" style="font-size: 20px;" />
                 <ui:Button name="note-close" text="&#215;" class="note-card__close" />
             </ui:VisualElement>
 
-            <ui:TextField name="note-input" multiline="true" class="note-card__input" />
+            <!-- класс нужен селектору .note-card__input .unity-base-text-field__input -->
+            <ui:TextField name="note-input" multiline="true" class="note-card__input" style="min-height: 140px; margin: 12px 0 0 0;" />
 
-            <ui:VisualElement name="note-card-footer" class="note-card__footer">
-                <ui:Button name="note-save" text="Сохранить" class="button button--primary" />
+            <ui:VisualElement name="note-card-footer" style="flex-direction: row; justify-content: flex-end; margin-top: 12px;">
+                <ui:Button name="note-save" text="Сохранить" class="button--primary" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

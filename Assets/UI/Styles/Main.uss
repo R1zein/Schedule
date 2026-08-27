@@ -1,5 +1,6 @@
-/* Единая таблица стилей приложения. Подключена к main.uxml,
-   поэтому распространяется и на динамически добавленные шаблоны. */
+/* Общий лист приложения: подключён во всех uxml, поэтому накрывает и статические
+   панели, и добавленные в рантайме шаблоны. Здесь живут токены и то, что либо
+   повторяется, либо переключается состоянием — остальное инлайном в самой панели. */
 
 :root {
     --bg: rgb(28, 30, 38);
@@ -18,48 +19,30 @@
     */
 }
 
-.app-root {
-    flex-grow: 1;
-    background-color: var(--bg);
-    padding: 16px;
-}
-
-/* ---------- панели ---------- */
-
-.panel--header {
-    flex-shrink: 0;
-}
-
-.panel--calendar {
-    flex-grow: 1;
-}
-
-.panel--overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-}
-
 .panel--hidden {
     display: none;
 }
 
-/* ---------- шапка ---------- */
+/* ---------- цвет из токенов ---------- */
 
-.header {
-    flex-direction: row;
-    align-items: center;
-    padding-bottom: 14px;
+/* var() работает только в правиле: в инлайн-стиле UXML резолвера переменных нет,
+   он бросает NullReferenceException и вместе с собой роняет сборку всего дерева.
+   Поэтому геометрия элемента может уехать инлайном, а цвет из токена — нет. */
+
+.bg-app {
+    background-color: var(--bg);
 }
 
-.header__title {
-    flex-grow: 1;
-    font-size: 26px;
+.card {
+    background-color: var(--surface);
+    border-color: var(--border);
+}
+
+.tx-bright {
     color: var(--text);
-    -unity-text-align: middle-center;
 }
+
+/* ---------- кнопки ---------- */
 
 .header__nav {
     width: 44px;
@@ -83,16 +66,21 @@
     background-color: var(--accent);
 }
 
-/* ---------- календарь ---------- */
-
-.calendar {
-    flex-grow: 1;
+.button--primary {
+    margin: 0;
+    padding: 8px 18px;
+    font-size: 15px;
+    color: rgb(28, 30, 38);
+    background-color: var(--accent);
+    border-width: 0;
+    border-radius: 10px;
 }
 
-.calendar__weekdays {
-    flex-direction: row;
-    flex-shrink: 0;
+.button--primary:hover {
+    background-color: rgb(244, 186, 110);
 }
+
+/* ---------- дни недели ---------- */
 
 .weekday {
     flex-grow: 1;
@@ -107,155 +95,7 @@
     color: var(--day-off);
 }
 
-.calendar__grid {
-    flex-grow: 1;
-}
-
-/* TemplateContainer недели */
-.week-row-container {
-    flex-grow: 1;
-    flex-basis: 0;
-}
-
-.week-row {
-    flex-grow: 1;
-    flex-direction: row;
-}
-
-/* ---------- ячейка дня (динамический шаблон) ---------- */
-
-/* TemplateContainer ячейки */
-.slot-cell {
-    flex-grow: 1;
-    flex-basis: 0;
-}
-
-.slot {
-    flex-grow: 1;
-    margin: 3px;
-    border-width: 1px;
-    border-color: var(--border);
-    border-radius: 12px;
-    background-color: var(--surface);
-    overflow: hidden;
-}
-
-.slot__surface {
-    flex-grow: 1;
-    margin: 0;
-    padding: 6px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: rgba(0, 0, 0, 0);
-    border-width: 0;
-    border-radius: 12px;
-    transition-property: background-color;
-    transition-duration: 0.12s;
-}
-
-.slot__surface:hover {
-    background-color: var(--surface-hover);
-}
-
-.slot__day {
-    font-size: 17px;
-    color: var(--text);
-}
-
-.slot--day-off .slot__day {
-    color: var(--day-off);
-}
-
-/* дни соседних месяцев глушим прозрачностью, чтобы красный выходного не терялся */
-.slot--outside {
-    opacity: 0.45;
-}
-
-.slot--today {
-    border-color: var(--accent);
-    border-width: 2px;
-}
-
-.slot__note-mark {
-    display: none;
-    position: absolute;
-    left: 8px;
-    bottom: 8px;
-    width: 6px;
-    height: 6px;
-    border-radius: 3px;
-    background-color: var(--accent);
-}
-
-.slot--has-note .slot__note-mark {
-    display: flex;
-}
-
-/* выезжающая панель действий */
-.slot__popup {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 42%;
-    min-width: 34px;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--accent);
-    translate: 110% 0;
-    transition-property: translate;
-    transition-duration: 0.18s;
-    transition-timing-function: ease-out;
-}
-
-.slot--selected .slot__popup {
-    translate: 0 0;
-}
-
-.slot__action {
-    width: 26px;
-    height: 26px;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url("project://database/Assets/Textures/Icons/Notes.png");
-    -unity-background-scale-mode: scale-to-fit;
-}
-
-.slot__action:hover {
-    scale: 1.15 1.15;
-}
-
 /* ---------- редактор заметки ---------- */
-
-.note-scrim {
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.55);
-}
-
-.note-card {
-    width: 82%;
-    max-width: 520px;
-    padding: 16px;
-    border-radius: 16px;
-    background-color: var(--surface);
-    border-width: 1px;
-    border-color: var(--border);
-}
-
-.note-card__header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.note-card__title {
-    font-size: 20px;
-    color: var(--text);
-}
 
 .note-card__close {
     width: 32px;
@@ -272,13 +112,7 @@
     color: var(--text);
 }
 
-.note-card__input {
-    min-height: 140px;
-    margin-top: 12px;
-    margin-left: 0;
-    margin-right: 0;
-}
-
+/* внутренний элемент TextField — до него дотянуться можно только селектором */
 .note-card__input .unity-base-text-field__input {
     padding: 10px;
     border-width: 1px;
@@ -287,24 +121,4 @@
     background-color: var(--bg);
     color: var(--text);
     white-space: normal;
-}
-
-.note-card__footer {
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-top: 12px;
-}
-
-.button--primary {
-    margin: 0;
-    padding: 8px 18px;
-    font-size: 15px;
-    color: rgb(28, 30, 38);
-    background-color: var(--accent);
-    border-width: 0;
-    border-radius: 10px;
-}
-
-.button--primary:hover {
-    background-color: rgb(244, 186, 110);
 }

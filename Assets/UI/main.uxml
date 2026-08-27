@@ -5,10 +5,11 @@
     <ui:Template name="CalendarPanel" src="project://database/Assets/UI/Panels/CalendarPanel.uxml" />
     <ui:Template name="NoteEditorPanel" src="project://database/Assets/UI/Panels/NoteEditorPanel.uxml" />
 
-    <!-- main.uxml — контейнер всех панелей. Новая панель = новый Template + Instance здесь. -->
-    <ui:VisualElement name="app-root" class="app-root">
-        <ui:Instance template="HeaderPanel" name="header-panel" class="panel panel--header" />
-        <ui:Instance template="CalendarPanel" name="calendar-panel" class="panel panel--calendar" />
-        <ui:Instance template="NoteEditorPanel" name="note-editor-panel" class="panel panel--overlay" />
+    <!-- main.uxml — контейнер всех панелей. Новая панель = новый Template + Instance здесь.
+         Место панели в приложении задаётся тут, внутреннее устройство — в её собственном файле. -->
+    <ui:VisualElement name="app-root" class="bg-app" style="flex-grow: 1; padding: 16px;">
+        <ui:Instance template="HeaderPanel" name="header-panel" style="flex-shrink: 0;" />
+        <ui:Instance template="CalendarPanel" name="calendar-panel" style="flex-grow: 1;" />
+        <ui:Instance template="NoteEditorPanel" name="note-editor-panel" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
     </ui:VisualElement>
 </ui:UXML>

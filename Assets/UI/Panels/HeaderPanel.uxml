@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="header-root" class="header">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+
+    <ui:VisualElement name="header-root" style="flex-direction: row; align-items: center; padding-bottom: 14px;">
         <ui:Button name="header-previous" text="&#8249;" class="header__nav" />
-        <ui:Label name="header-title" text="Месяц Год" class="header__title" />
+        <ui:Label name="header-title" text="Месяц Год" class="tx-bright" style="flex-grow: 1; font-size: 26px; -unity-text-align: middle-center;" />
         <ui:Button name="header-next" text="&#8250;" class="header__nav" />
     </ui:VisualElement>
 </ui:UXML>

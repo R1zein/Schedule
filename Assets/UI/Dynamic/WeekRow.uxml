@@ -1,4 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <!-- Динамический шаблон: одна неделя. Ячейки добавляются в рантайме. -->
-    <ui:VisualElement name="week-row" class="week-row" />
+    <ui:VisualElement name="week-row" style="flex-grow: 1; flex-direction: row;" />
 </ui:UXML>
