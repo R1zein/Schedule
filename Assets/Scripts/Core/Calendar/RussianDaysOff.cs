@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Schedule.Core.Calendar
+namespace Core.Calendar
 {
     /// <summary>
     /// Нерабочие дни в РФ: суббота с воскресеньем, праздники по ст. 112 ТК

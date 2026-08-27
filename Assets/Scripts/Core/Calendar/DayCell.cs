@@ -1,6 +1,6 @@
 using System;
 
-namespace Schedule.Core.Calendar
+namespace Core.Calendar
 {
     /// <summary>
     /// Одна ячейка месячной сетки. Чистые данные: о том, как это рисуется, слой не знает.

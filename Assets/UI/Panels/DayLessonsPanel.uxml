@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+    <Style src="project://database/Assets/UI/Styles/Schedule.uss" />
+
+    <ui:VisualElement name="day-lessons-scrim" style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.55);">
+        <ui:VisualElement name="day-lessons-card" class="card" style="width: 70%; max-width: 460px; padding: 16px; border-radius: 16px; border-width: 1px;">
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: space-between;">
+                <ui:Label name="day-lessons-title" text="Дата" class="tx-bright" style="font-size: 20px;" />
+                <ui:Button name="day-lessons-close" text="&#215;" class="note-card__close" />
+            </ui:VisualElement>
+
+            <!-- сюда в рантайме кладутся LessonLine.uxml -->
+            <ui:VisualElement name="day-lessons-list" style="margin-top: 12px;" />
+            <ui:Label name="day-lessons-empty" text="В этот день уроков нет" class="schedule-hint" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

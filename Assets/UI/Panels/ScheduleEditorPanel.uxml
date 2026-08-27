@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+    <Style src="project://database/Assets/UI/Styles/Schedule.uss" />
+
+    <ui:VisualElement name="schedule-root" style="flex-grow: 1;">
+        <ui:Label text="Шаблон недели повторяется на все рабочие дни" class="schedule-hint" />
+
+        <ui:ScrollView name="schedule-scroll" style="flex-grow: 1;">
+            <!-- сюда в рантайме кладутся ScheduleDay.uxml -->
+            <ui:VisualElement name="schedule-days" style="flex-direction: row;" />
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

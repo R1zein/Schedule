@@ -1,9 +1,9 @@
 using System;
-using Schedule.Core.Calendar;
+using Core.Calendar;
 using UnityEngine.UIElements;
 using Zenject;
 
-namespace Schedule.UI.Elements
+namespace UI.Elements
 {
     /// <summary>
     /// Обёртка над динамическим шаблоном DaySlot.uxml — одна ячейка дня.
@@ -22,9 +22,11 @@ namespace Schedule.UI.Elements
         private readonly Button _surface;
         private readonly Button _addNote;
         private readonly Label _dayLabel;
+        private readonly Label _lessonsLabel;
 
         public event Action<DaySlotView> Selected;
         public event Action<DaySlotView> NoteRequested;
+        public event Action<DaySlotView> DetailsRequested;
 
         public DaySlotView(TemplateContainer root)
         {
@@ -35,9 +37,13 @@ namespace Schedule.UI.Elements
             _surface = _root.Q<Button>("slot-surface");
             _addNote = _root.Q<Button>("slot-add-note");
             _dayLabel = _root.Q<Label>("slot-day");
+            _lessonsLabel = _root.Q<Label>("slot-lessons");
 
             _surface.clicked += OnSurfaceClicked;
             _addNote.clicked += OnAddNoteClicked;
+
+            // clicked у кнопки ловит только левую кнопку, правую слушаем отдельно
+            _surface.RegisterCallback<PointerDownEvent>(OnPointerDown);
         }
 
         public VisualElement Root => _root;
@@ -61,6 +67,11 @@ namespace Schedule.UI.Elements
             _slot.EnableInClassList(SelectedClass, selected);
         }
 
+        public void SetLessonCount(int count)
+        {
+            _lessonsLabel.text = count > 0 ? count.ToString() : string.Empty;
+        }
+
         public void SetHasNote(bool hasNote)
         {
             _slot.EnableInClassList(HasNoteClass, hasNote);
@@ -70,14 +81,24 @@ namespace Schedule.UI.Elements
         {
             _surface.clicked -= OnSurfaceClicked;
             _addNote.clicked -= OnAddNoteClicked;
+            _surface.UnregisterCallback<PointerDownEvent>(OnPointerDown);
             Selected = null;
             NoteRequested = null;
+            DetailsRequested = null;
             _root.RemoveFromHierarchy();
         }
 
         private void OnSurfaceClicked() => Selected?.Invoke(this);
 
         private void OnAddNoteClicked() => NoteRequested?.Invoke(this);
+
+        private void OnPointerDown(PointerDownEvent evt)
+        {
+            if (evt.button == 1)
+            {
+                DetailsRequested?.Invoke(this);
+            }
+        }
 
         /// <summary>Фабрика динамических ячеек, биндится в инсталлере.</summary>
         public class Factory : PlaceholderFactory<TemplateContainer, DaySlotView>

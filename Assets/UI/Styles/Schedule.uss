@@ -1,0 +1,116 @@
+/* Редактор недели и панель дня. Подключён в ScheduleEditorPanel.uxml, DayLessonsPanel.uxml
+   и в динамических шаблонах, которые в них кладутся. */
+
+.schedule-hint {
+    color: var(--text-dim);
+    font-size: 14px;
+    padding-bottom: 12px;
+}
+
+/* TemplateContainer колонки: класс вешает ScheduleEditorPanelController */
+.schedule-day-container {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.schedule-day {
+    flex-grow: 1;
+    margin: 3px;
+    padding: 8px;
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: 12px;
+    background-color: var(--surface);
+}
+
+.schedule-day__title {
+    font-size: 15px;
+    color: var(--text);
+    padding-bottom: 8px;
+    -unity-text-align: middle-center;
+}
+
+.schedule-day__add {
+    margin: 8px 0 0 0;
+    padding: 4px;
+    font-size: 13px;
+    color: var(--text-dim);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: 8px;
+}
+
+.schedule-day__add:hover {
+    color: var(--text);
+    background-color: var(--surface-hover);
+}
+
+.lesson-row {
+    margin-bottom: 8px;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: var(--bg);
+}
+
+.lesson-row__name .unity-base-text-field__input {
+    padding: 4px 6px;
+    font-size: 14px;
+    color: var(--text);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+}
+
+.lesson-row__time {
+    width: 46px;
+    margin: 0;
+}
+
+.lesson-row__time .unity-base-text-field__input {
+    padding: 2px 4px;
+    font-size: 13px;
+    color: var(--text-dim);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    -unity-text-align: middle-center;
+}
+
+.lesson-row__dash {
+    color: var(--text-dim);
+    font-size: 13px;
+}
+
+.lesson-row__remove {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    padding: 0;
+    font-size: 14px;
+    color: var(--text-dim);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+}
+
+.lesson-row__remove:hover {
+    color: var(--day-off);
+}
+
+/* ---------- панель дня ---------- */
+
+.lesson-line {
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.lesson-line__time {
+    width: 110px;
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.lesson-line__name {
+    flex-grow: 1;
+    font-size: 15px;
+    color: var(--text);
+}

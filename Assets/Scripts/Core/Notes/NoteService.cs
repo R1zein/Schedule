@@ -1,8 +1,8 @@
 using System;
-using Schedule.Core.Data;
+using Core.Data;
 using Zenject;
 
-namespace Schedule.Core.Notes
+namespace Core.Notes
 {
     /// <summary>
     /// Доступ к заметкам поверх <see cref="SaveData"/>. О UI не знает,

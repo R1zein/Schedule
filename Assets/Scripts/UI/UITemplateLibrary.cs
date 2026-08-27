@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Schedule.UI
+namespace UI
 {
     /// <summary>
     /// Ссылки на uxml-шаблоны, которые создаются и удаляются в рантайме.
@@ -12,9 +12,18 @@ namespace Schedule.UI
     {
         [SerializeField] private VisualTreeAsset _weekRow;
         [SerializeField] private VisualTreeAsset _daySlot;
+        [SerializeField] private VisualTreeAsset _scheduleDay;
+        [SerializeField] private VisualTreeAsset _lessonRow;
+        [SerializeField] private VisualTreeAsset _lessonLine;
 
         public VisualTreeAsset WeekRow => _weekRow;
 
         public VisualTreeAsset DaySlot => _daySlot;
+
+        public VisualTreeAsset ScheduleDay => _scheduleDay;
+
+        public VisualTreeAsset LessonRow => _lessonRow;
+
+        public VisualTreeAsset LessonLine => _lessonLine;
     }
 }

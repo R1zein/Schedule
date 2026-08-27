@@ -1,15 +1,16 @@
-using Schedule.Core;
-using Schedule.Core.Calendar;
-using Schedule.Core.Data;
-using Schedule.Core.Notes;
-using Schedule.UI;
-using Schedule.UI.Elements;
-using Schedule.UI.Panels;
+using Core;
+using Core.Calendar;
+using Core.Data;
+using Core.Lessons;
+using Core.Notes;
+using UI;
+using UI.Elements;
+using UI.Panels;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
 
-namespace Schedule.Installers
+namespace Installers
 {
     /// <summary>
     /// Композиционный корень сцены: единственное место, где известно,
@@ -31,12 +32,18 @@ namespace Schedule.Installers
 
             Container.BindInterfacesAndSelfTo<CalendarService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NoteService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScheduleService>().AsSingle();
+            Container.Bind<NavigationService>().AsSingle();
 
             Container.BindFactory<TemplateContainer, DaySlotView, DaySlotView.Factory>();
+            Container.BindFactory<TemplateContainer, LessonRowView, LessonRowView.Factory>();
 
+            Container.BindInterfacesAndSelfTo<TabsPanelController>().AsSingle();
             Container.BindInterfacesAndSelfTo<HeaderPanelController>().AsSingle();
             Container.BindInterfacesAndSelfTo<CalendarPanelController>().AsSingle();
             Container.BindInterfacesAndSelfTo<NoteEditorPanelController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScheduleEditorPanelController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DayLessonsPanelController>().AsSingle();
         }
     }
 }

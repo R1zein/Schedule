@@ -1,10 +1,10 @@
 using System;
-using Schedule.Core;
-using Schedule.Core.Notes;
+using Core;
+using Core.Notes;
 using UnityEngine.UIElements;
 using Zenject;
 
-namespace Schedule.UI.Panels
+namespace UI.Panels
 {
     /// <summary>
     /// Оверлей редактирования заметки на дату.

@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+    <Style src="project://database/Assets/UI/Styles/Schedule.uss" />
+
+    <!-- Динамический шаблон: колонка одного дня недели в редакторе. -->
+    <ui:VisualElement name="schedule-day" class="schedule-day">
+        <ui:Label name="schedule-day-title" text="День" class="schedule-day__title" />
+        <ui:VisualElement name="schedule-day-lessons" />
+        <ui:Button name="schedule-day-add" text="+ урок" class="schedule-day__add" />
+    </ui:VisualElement>
+</ui:UXML>

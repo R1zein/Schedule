@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+    <Style src="project://database/Assets/UI/Styles/Schedule.uss" />
+
+    <!-- Динамический шаблон: строка урока в панели дня, только просмотр. -->
+    <ui:VisualElement name="lesson-line" class="lesson-line">
+        <ui:Label name="lesson-line-time" text="00:00" class="lesson-line__time" />
+        <ui:Label name="lesson-line-name" text="Урок" class="lesson-line__name" />
+    </ui:VisualElement>
+</ui:UXML>

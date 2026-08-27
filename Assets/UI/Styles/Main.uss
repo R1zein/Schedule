@@ -13,10 +13,10 @@
     --accent-dim: rgb(196, 128, 96);
     --day-off: rgb(232, 104, 104);
 
-    /* Шрифт проекта. Раскомментировать после проверки, что TMP-ассет
-       подхватывается UI Toolkit (Unity 6 умеет это через -unity-font-definition):
-    -unity-font-definition: url("project://database/Assets/Folder/Comfortaa-Regular%20SDF.asset");
-    */
+    /* Берём именно ttf, а не TMP-ассет: TMP_FontAsset наследуется от TMP_Asset,
+       а -unity-font-definition принимает Font или TextCore-шрифт. Из ttf UI Toolkit
+       строит динамический атлас и растеризует глифы под нужный кегль — отсюда резкость. */
+    -unity-font-definition: url("project://database/Assets/Folder/Comfortaa-Medium.ttf");
 }
 
 .panel--hidden {
@@ -80,12 +80,34 @@
     background-color: rgb(244, 186, 110);
 }
 
+/* ---------- вкладки ---------- */
+
+.tab {
+    margin: 0 8px 0 0;
+    padding: 6px 16px;
+    font-size: 15px;
+    color: var(--text-dim);
+    background-color: var(--surface);
+    border-width: 0;
+    border-radius: 10px;
+}
+
+.tab:hover {
+    color: var(--text);
+    background-color: var(--surface-hover);
+}
+
+.tab--active {
+    color: rgb(28, 30, 38);
+    background-color: var(--accent);
+}
+
 /* ---------- дни недели ---------- */
 
 .weekday {
     flex-grow: 1;
     flex-basis: 0;
-    font-size: 13px;
+    font-size: 16px;
     color: var(--text-dim);
     padding-bottom: 6px;
     -unity-text-align: middle-center;

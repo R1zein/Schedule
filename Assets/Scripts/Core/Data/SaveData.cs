@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Schedule.Core.Data
+namespace Core.Data
 {
     [CreateAssetMenu(fileName = "SaveData", menuName = "Scriptable Objects/SaveData")]
     public class SaveData : ScriptableObject
     {
         [SerializeField] private List<DateData> _dateDatas = new();
+        [SerializeField] private List<DaySchedule> _week = new();
 
         public IReadOnlyList<DateData> Entries => _dateDatas;
+
+        /// <summary>Шаблон недели: семь дней, порядок неважен — ищется по DayOfWeek.</summary>
+        public List<DaySchedule> Week => _week;
 
         public bool TryGetDateData(DateTime date, out DateData data)
         {

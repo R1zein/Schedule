@@ -1,6 +1,6 @@
 {
     "name": "Schedule.Core",
-    "rootNamespace": "Schedule.Core",
+    "rootNamespace": "Core",
     "references": [
         "Zenject"
     ],

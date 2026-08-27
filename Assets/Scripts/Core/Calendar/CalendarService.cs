@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Zenject;
 
-namespace Schedule.Core.Calendar
+namespace Core.Calendar
 {
     /// <summary>
     /// Модель календаря: текущий месяц и его сетка. Ни о каком UI не знает,
@@ -36,21 +36,14 @@ namespace Schedule.Core.Calendar
 
         public DateTime Month => _month;
 
-        public string Title
-        {
-            get
-            {
-                string title = _month.ToString("MMMM yyyy", _culture);
-                return title.Length > 0 ? char.ToUpper(title[0], _culture) + title.Substring(1) : title;
-            }
-        }
+        public string Title => Capitalize(_month.ToString("MMMM yyyy", _culture));
 
-        public string GetWeekDayName(int index)
-        {
-            var names = _culture.DateTimeFormat.AbbreviatedDayNames;
-            string name = names[(index + 1) % DaysInWeek]; // сетка начинается с понедельника
-            return name.Length > 0 ? char.ToUpper(name[0], _culture) + name.Substring(1) : name;
-        }
+        // индекс 0 — понедельник: и сетка календаря, и редактор расписания начинаются с него
+        public string GetWeekDayName(int index) => Capitalize(_culture.DateTimeFormat.AbbreviatedDayNames[(index + 1) % DaysInWeek]);
+
+        public string GetWeekDayFullName(int index) => Capitalize(_culture.DateTimeFormat.DayNames[(index + 1) % DaysInWeek]);
+
+        private string Capitalize(string text) => char.ToUpper(text[0], _culture) + text.Substring(1);
 
         public void NextMonth() => SetMonth(_month.AddMonths(1));
 

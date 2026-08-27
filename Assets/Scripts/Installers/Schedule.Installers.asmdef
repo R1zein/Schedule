@@ -1,6 +1,6 @@
 {
     "name": "Schedule.Installers",
-    "rootNamespace": "Schedule.Installers",
+    "rootNamespace": "Installers",
     "references": [
         "Schedule.Core",
         "Schedule.UI",

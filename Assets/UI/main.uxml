@@ -4,12 +4,18 @@
     <ui:Template name="HeaderPanel" src="project://database/Assets/UI/Panels/HeaderPanel.uxml" />
     <ui:Template name="CalendarPanel" src="project://database/Assets/UI/Panels/CalendarPanel.uxml" />
     <ui:Template name="NoteEditorPanel" src="project://database/Assets/UI/Panels/NoteEditorPanel.uxml" />
+    <ui:Template name="TabsPanel" src="project://database/Assets/UI/Panels/TabsPanel.uxml" />
+    <ui:Template name="ScheduleEditorPanel" src="project://database/Assets/UI/Panels/ScheduleEditorPanel.uxml" />
+    <ui:Template name="DayLessonsPanel" src="project://database/Assets/UI/Panels/DayLessonsPanel.uxml" />
 
     <!-- main.uxml — контейнер всех панелей. Новая панель = новый Template + Instance здесь.
          Место панели в приложении задаётся тут, внутреннее устройство — в её собственном файле. -->
     <ui:VisualElement name="app-root" class="bg-app" style="flex-grow: 1; padding: 16px;">
+        <ui:Instance template="TabsPanel" name="tabs-panel" style="flex-shrink: 0;" />
         <ui:Instance template="HeaderPanel" name="header-panel" style="flex-shrink: 0;" />
         <ui:Instance template="CalendarPanel" name="calendar-panel" style="flex-grow: 1;" />
+        <ui:Instance template="ScheduleEditorPanel" name="schedule-editor-panel" style="flex-grow: 1;" />
         <ui:Instance template="NoteEditorPanel" name="note-editor-panel" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+        <ui:Instance template="DayLessonsPanel" name="day-lessons-panel" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
     </ui:VisualElement>
 </ui:UXML>

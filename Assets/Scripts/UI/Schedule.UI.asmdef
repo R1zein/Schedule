@@ -1,6 +1,6 @@
 {
     "name": "Schedule.UI",
-    "rootNamespace": "Schedule.UI",
+    "rootNamespace": "UI",
     "references": [
         "Schedule.Core",
         "Zenject"

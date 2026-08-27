@@ -11,6 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 108b1a4f2463ab64b925bd7ff68f4ad0, type: 3}
   m_Name: UITemplateLibrary
-  m_EditorClassIdentifier: Schedule.UI::Schedule.UI.UITemplateLibrary
+  m_EditorClassIdentifier: Schedule.UI::UI.UITemplateLibrary
   _weekRow: {fileID: 9197481963319205126, guid: 98620a9fd1faee04599c6256980747fe, type: 3}
   _daySlot: {fileID: 9197481963319205126, guid: 459574f37a2dc0348b9e4fb2679b7928, type: 3}
+  _scheduleDay: {fileID: 9197481963319205126, guid: cd81ad01052600e4dae15862b90c1ac9, type: 3}
+  _lessonRow: {fileID: 9197481963319205126, guid: 4f8ccbf273b9cff42b2d3f92acdf0611, type: 3}
+  _lessonLine: {fileID: 9197481963319205126, guid: 432465eb716d47b49bca5f7d1be1148b, type: 3}

@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+    <Style src="project://database/Assets/UI/Styles/Schedule.uss" />
+
+    <!-- Динамический шаблон: строка урока в редакторе. -->
+    <ui:VisualElement name="lesson-row" class="lesson-row">
+        <ui:TextField name="lesson-name" class="lesson-row__name" />
+        <ui:VisualElement style="flex-direction: row; align-items: center; margin-top: 4px;">
+            <ui:TextField name="lesson-start" class="lesson-row__time" />
+            <ui:Label text="—" class="lesson-row__dash" />
+            <ui:TextField name="lesson-end" class="lesson-row__time" />
+            <ui:Button name="lesson-remove" text="&#215;" class="lesson-row__remove" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

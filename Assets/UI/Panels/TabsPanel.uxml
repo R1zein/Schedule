@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Main.uss" />
+
+    <ui:VisualElement name="tabs-root" style="flex-direction: row; flex-shrink: 0; padding-bottom: 12px;">
+        <ui:Button name="tab-calendar" text="Календарь" class="tab" />
+        <ui:Button name="tab-schedule" text="Расписание" class="tab" />
+    </ui:VisualElement>
+</ui:UXML>

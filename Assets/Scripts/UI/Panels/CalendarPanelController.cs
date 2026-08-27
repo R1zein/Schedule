@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Schedule.Core.Calendar;
-using Schedule.Core.Notes;
-using Schedule.UI.Elements;
+using Core.Calendar;
+using Core.Lessons;
+using Core.Notes;
+using UI.Elements;
 using UnityEngine.UIElements;
 using Zenject;
 
-namespace Schedule.UI.Panels
+namespace UI.Panels
 {
     /// <summary>
     /// Сетка месяца: строит недели и ячейки из динамических шаблонов
@@ -21,7 +22,10 @@ namespace Schedule.UI.Panels
         [Inject] private UITemplateLibrary _templates;
         [Inject] private CalendarService _calendar;
         [Inject] private NoteService _notes;
+        [Inject] private ScheduleService _schedule;
         [Inject] private NoteEditorPanelController _noteEditor;
+        [Inject] private NavigationService _navigation;
+        [Inject] private DayLessonsPanelController _dayLessons;
         [Inject] private DaySlotView.Factory _slotFactory;
 
         private VisualElement _root;
@@ -40,7 +44,10 @@ namespace Schedule.UI.Panels
 
             _calendar.Changed += Rebuild;
             _notes.NoteChanged += OnNoteChanged;
+            _schedule.Changed += Rebuild;
+            _navigation.Changed += UpdateVisibility;
 
+            UpdateVisibility();
             Rebuild();
         }
 
@@ -48,6 +55,8 @@ namespace Schedule.UI.Panels
         {
             _calendar.Changed -= Rebuild;
             _notes.NoteChanged -= OnNoteChanged;
+            _schedule.Changed -= Rebuild;
+            _navigation.Changed -= UpdateVisibility;
 
             Clear();
         }
@@ -75,12 +84,19 @@ namespace Schedule.UI.Panels
 
                 DaySlotView slot = _slotFactory.Create(_templates.DaySlot.Instantiate());
                 slot.Bind(days[i], _notes.HasNote(days[i].Date));
+                slot.SetLessonCount(_schedule.GetLessons(days[i].Date).Count);
                 slot.Selected += OnSlotSelected;
                 slot.NoteRequested += OnSlotNoteRequested;
+                slot.DetailsRequested += OnSlotDetailsRequested;
 
                 row.Add(slot.Root);
                 _slots.Add(slot);
             }
+        }
+
+        private void UpdateVisibility()
+        {
+            _root.EnableInClassList("panel--hidden", _navigation.Current != Tab.Calendar);
         }
 
         private void OnNoteChanged(DateTime date)
@@ -110,6 +126,7 @@ namespace Schedule.UI.Panels
             {
                 _slots[i].Selected -= OnSlotSelected;
                 _slots[i].NoteRequested -= OnSlotNoteRequested;
+                _slots[i].DetailsRequested -= OnSlotDetailsRequested;
                 _slots[i].Dispose();
             }
 
@@ -137,5 +154,7 @@ namespace Schedule.UI.Panels
         }
 
         private void OnSlotNoteRequested(DaySlotView slot) => _noteEditor.Open(slot.Date);
+
+        private void OnSlotDetailsRequested(DaySlotView slot) => _dayLessons.Open(slot.Date);
     }
 }

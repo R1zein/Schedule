@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Schedule.Core
+namespace Core
 {
     /// <summary>
     /// Настройки локали. Обычный класс: создаётся инсталлером и раздаётся сервисам,
