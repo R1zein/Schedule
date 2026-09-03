@@ -26,7 +26,7 @@ namespace UI.Panels
         [Inject] private NoteEditorPanelController _noteEditor;
         [Inject] private NavigationService _navigation;
         [Inject] private DayLessonsPanelController _dayLessons;
-        [Inject] private DaySlotView.Factory _slotFactory;
+        [Inject] private ViewFactory _views;
 
         private VisualElement _root;
         private VisualElement _grid;
@@ -82,7 +82,7 @@ namespace UI.Panels
                     row = rowContainer.Q<VisualElement>("week-row");
                 }
 
-                DaySlotView slot = _slotFactory.Create(_templates.DaySlot.Instantiate());
+                DaySlotView slot = _views.CreateDaySlot();
                 slot.Bind(days[i], _notes.HasNote(days[i].Date));
                 slot.SetLessonCount(_schedule.GetLessons(days[i].Date).Count);
                 slot.Selected += OnSlotSelected;

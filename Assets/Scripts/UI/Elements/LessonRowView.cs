@@ -1,7 +1,6 @@
 using System;
 using Core.Data;
 using UnityEngine.UIElements;
-using Zenject;
 
 namespace UI.Elements
 {
@@ -87,9 +86,5 @@ namespace UI.Elements
         }
 
         private void OnRemoveClicked() => RemoveRequested?.Invoke(this);
-
-        public class Factory : PlaceholderFactory<TemplateContainer, LessonRowView>
-        {
-        }
     }
 }

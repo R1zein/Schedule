@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Calendar;
 using Core.Data;
+using Core.Saving;
 using Zenject;
 
 namespace Core.Lessons
@@ -11,27 +12,35 @@ namespace Core.Lessons
     /// Недельный шаблон уроков. Повторяется на все рабочие дни;
     /// в нерабочие (сб, вс, праздники и переносы) уроков нет.
     /// </summary>
-    public class ScheduleService : IInitializable
+    public class ScheduleService : IInitializable, IDisposable, ISaveLoadable
     {
         private static readonly Lesson[] Empty = Array.Empty<Lesson>();
 
-        [Inject] private SaveData _saveData;
+        [Inject] private SaveLoadService _saveLoad;
+
+        private readonly List<DaySchedule> _week = new();
 
         /// <summary>Бросается, когда меняется количество уроков — правка названия или времени сетку не трогает.</summary>
         public event Action Changed;
 
+        public string Key => "Schedule";
+
         public void Initialize()
         {
+            _saveLoad.Register(this); // если сейв есть, LoadState отработает прямо здесь
+
             // добиваем недостающие дни, чтобы редактору всегда было что показать
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < CalendarService.DaysInWeek; i++)
             {
                 DayOfWeek day = (DayOfWeek)i;
-                if (_saveData.Week.All(d => d.day != day))
+                if (_week.All(d => d.day != day))
                 {
-                    _saveData.Week.Add(new DaySchedule { day = day });
+                    _week.Add(new DaySchedule { day = day });
                 }
             }
         }
+
+        public void Dispose() => _saveLoad.Unregister(this);
 
         public IReadOnlyList<Lesson> GetLessons(DateTime date)
         {
@@ -40,7 +49,7 @@ namespace Core.Lessons
 
         public List<Lesson> GetTemplate(DayOfWeek day)
         {
-            return _saveData.Week.First(d => d.day == day).lessons;
+            return _week.First(d => d.day == day).lessons;
         }
 
         public Lesson AddLesson(DayOfWeek day)
@@ -57,6 +66,7 @@ namespace Core.Lessons
 
             lessons.Add(lesson);
             Changed?.Invoke();
+            _saveLoad.Save();
             return lesson;
         }
 
@@ -64,6 +74,27 @@ namespace Core.Lessons
         {
             GetTemplate(day).Remove(lesson);
             Changed?.Invoke();
+            _saveLoad.Save();
+        }
+
+        public object SaveState() => new Data { week = _week };
+
+        public void LoadState(SaveFile file)
+        {
+            Data data = file.GetState<Data>(Key);
+            if (data?.week == null)
+            {
+                return;
+            }
+
+            _week.Clear();
+            _week.AddRange(data.week);
+        }
+
+        [Serializable]
+        private class Data
+        {
+            public List<DaySchedule> week = new();
         }
     }
 }

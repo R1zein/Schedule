@@ -3,6 +3,7 @@ using Core.Calendar;
 using Core.Data;
 using Core.Lessons;
 using Core.Notes;
+using Core.Saving;
 using UI;
 using UI.Elements;
 using UI.Panels;
@@ -19,24 +20,23 @@ namespace Installers
     public class MainSceneInstaller : MonoInstaller
     {
         [SerializeField] private UIDocument _document;
-        [SerializeField] private SaveData _saveData;
         [SerializeField] private UITemplateLibrary _templates;
         [SerializeField] private string _cultureName = "ru-RU";
 
         public override void InstallBindings()
         {
             Container.BindInstance(_document);
-            Container.BindInstance(_saveData);
             Container.BindInstance(_templates);
             Container.BindInstance(new LocalizationConfig(_cultureName));
+
+            Container.BindInterfacesAndSelfTo<SaveLoadService>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<CalendarService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NoteService>().AsSingle();
             Container.BindInterfacesAndSelfTo<ScheduleService>().AsSingle();
             Container.Bind<NavigationService>().AsSingle();
 
-            Container.BindFactory<TemplateContainer, DaySlotView, DaySlotView.Factory>();
-            Container.BindFactory<TemplateContainer, LessonRowView, LessonRowView.Factory>();
+            Container.Bind<ViewFactory>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<TabsPanelController>().AsSingle();
             Container.BindInterfacesAndSelfTo<HeaderPanelController>().AsSingle();

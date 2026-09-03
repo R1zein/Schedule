@@ -1,7 +1,6 @@
 using System;
 using Core.Calendar;
 using UnityEngine.UIElements;
-using Zenject;
 
 namespace UI.Elements
 {
@@ -98,11 +97,6 @@ namespace UI.Elements
             {
                 DetailsRequested?.Invoke(this);
             }
-        }
-
-        /// <summary>Фабрика динамических ячеек, биндится в инсталлере.</summary>
-        public class Factory : PlaceholderFactory<TemplateContainer, DaySlotView>
-        {
         }
     }
 }

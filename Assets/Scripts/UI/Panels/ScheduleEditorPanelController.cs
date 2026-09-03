@@ -23,7 +23,7 @@ namespace UI.Panels
         [Inject] private ScheduleService _schedule;
         [Inject] private CalendarService _calendar;
         [Inject] private NavigationService _navigation;
-        [Inject] private LessonRowView.Factory _rowFactory;
+        [Inject] private ViewFactory _views;
 
         private VisualElement _root;
         private VisualElement _days;
@@ -78,7 +78,7 @@ namespace UI.Panels
                 VisualElement lessons = column.Q<VisualElement>("schedule-day-lessons");
                 foreach (Lesson lesson in _schedule.GetTemplate(day))
                 {
-                    LessonRowView row = _rowFactory.Create(_templates.LessonRow.Instantiate());
+                    LessonRowView row = _views.CreateLessonRow();
                     row.Bind(day, lesson);
                     row.RemoveRequested += OnRemoveRequested;
 
